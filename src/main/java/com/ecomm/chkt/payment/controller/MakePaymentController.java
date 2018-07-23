@@ -2,8 +2,6 @@ package com.ecomm.chkt.payment.controller;
 
 import com.ecomm.chkt.payment.service.AddPaymentService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -16,13 +14,11 @@ public class MakePaymentController {
     @Autowired
     private AddPaymentService addPaymentService;
 
-    private final Log log = LogFactory.getLog(getClass());
-
     @RequestMapping(method=RequestMethod.GET, value = "/makePayment")
     public String checkInventory(@RequestParam(value = "amount", required = false) float amount,
                                  @RequestParam(value = "orderId", required = false) Integer orderId) {
-        this.log.info("MakePaymentController :: makePayment");
-        this.log.info("Processing Amount :: " + amount);
+        System.out.println("InventoryController :: checkInventory");
+        System.out.println("Processing Amount :: " + amount);
         try {
             Thread.sleep(20000);
             addPaymentService.addPayment(orderId, amount);
