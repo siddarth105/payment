@@ -2,6 +2,7 @@ package com.ecomm.chkt.payment.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Primary;
 import org.springframework.data.cassandra.config.CassandraClusterFactoryBean;
 import org.springframework.data.cassandra.config.CassandraSessionFactoryBean;
 import org.springframework.data.cassandra.config.SchemaAction;
@@ -21,7 +22,7 @@ public class CassandraConfig {
     public CassandraClusterFactoryBean cluster() {
         CassandraClusterFactoryBean cluster = new CassandraClusterFactoryBean();
         cluster.setContactPoints("localhost");
-        cluster.setPort(32769);
+        cluster.setPort(9042);
         return cluster;
     }
 
@@ -46,7 +47,8 @@ public class CassandraConfig {
     }
 
     @Bean
-    public CassandraOperations cassandraTemplate() throws Exception {
+    @Primary
+    public CassandraOperations cassandraTemplateCart() throws Exception {
         return new CassandraTemplate(session().getObject());
     }
 }
